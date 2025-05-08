@@ -1,66 +1,148 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# API CRUD de Productos
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Requisitos
 
-## About Laravel
+API CRUD de Productos
+Requisitos
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Primero validar de tener estos requisitos instalados:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- PHP 8.0 o superior
+- Composer
+- MySQL
+- Laravel 10.x
+- PHPUnit (para las pruebas unitarias)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Instalación
 
-## Learning Laravel
+Sigue los siguientes pasos para instalar el proyecto en tu máquina local:
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+1. clonar el repositorio: https://github.com/angelmello10/crud-api.git
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+2. **Instalar dependencias de PHP:
+   
+   cd tu-repositorio
+   composer install
+   
 
-## Laravel Sponsors
+3. Configurar el archivo `.env`:
+   Copia el archivo `.env.example` y renómbralo a env: 
+   cp .env.example .env
+   
+   Luego, configura las variables de entorno, especialmente la conexión a la base de datos:
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+   DB_CONNECTION=mysql
+   DB_HOST=127.0.0.1
+   DB_PORT=3306
+   DB_DATABASE=nombre_de_base_de_datos
+   DB_USERNAME=usuario
+   DB_PASSWORD=contraseña
+   `
 
-### Premium Partners
+4. Generar la clave de aplicación:
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+   php artisan key:generate
+   
+5. Migrar las tablas de la base de datos:
+   Si aún no has creado las tablas, ejecuta las migraciones:
 
-## Contributing
+   php artisan migrate
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+6. Instalar dependencias de Node.js (si usas frontend):
+   Si tienes un frontend, ejecuta:
+   
+   npm install
+   npm run dev
+   
 
-## Code of Conduct
+Cómo probar la API
+1. Pruebas unitarias:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Para ejecutar las pruebas unitarias de la API, ejecuta el siguiente comando:
 
-## Security Vulnerabilities
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+php artisan test
 
-## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+2. Pruebas con Postman:
+
+-Registrarse:
+  Para registrarse, envía una solicitud `POST` a `/api/register` con los siguientes parámetros:
+  json
+  {
+    "name": "Nombre del usuario",
+    "email": "email@dominio.com",
+    "password": "contraseña",
+    "password_confirmation": "contraseña"
+  }
+  
+
+- Iniciar sesión:
+  Para iniciar sesión, envía una solicitud `POST` a `/api/login` con los siguientes parámetros:
+  `json
+  {
+    "email": "email@dominio.com",
+    "password": "contraseña"
+  }
+  
+
+- Obtener un token:
+  Después de iniciar sesión, recibirás un token de acceso que debes incluir en las solicitudes subsiguientes.
+
+Endpoints disponibles
+Usuarios
+
+-POST /api/register
+  Registra un nuevo usuario.
+
+- POST /api/login
+  Inicia sesión y obtiene un token de acceso.
+
+- POST /api/logout
+  Cierra sesión y revoca el token de acceso.  
+  (Requiere autenticación)
+
+- GET /api/user  
+  Obtiene los datos del usuario autenticado.  
+  (Requiere autenticación)
+
+Productos
+
+- GET /api/productos
+  Obtiene todos los productos registrados.
+
+- POST /api/productos
+  Crea un nuevo producto.  
+  (Requiere autenticación)
+
+- GET /api/productos/{id}
+  Obtiene los detalles de un producto específico.
+
+- PUT /api/productos/{id}
+  Actualiza los detalles de un producto.  
+  (Requiere autenticación)
+
+- DELETE /api/productos/{id}
+  Elimina un producto.  
+  (Requiere autenticación)
+
+Categorías
+
+- GET /api/categorias
+  Obtiene todas las categorías.
+
+- POST /api/categorias
+  Crea una nueva categoría.  
+  (Requiere autenticación)
+
+- DELETE /api/categorias/{id}
+  Elimina una categoría.  
+  (Requiere autenticación)
+
+Notas adicionales
+
+- El proyecto usa Laravel Sanctumpara la autenticación de API.
+
+
+
